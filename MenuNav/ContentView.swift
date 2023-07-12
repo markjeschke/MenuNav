@@ -19,15 +19,21 @@ struct ContentView: View {
     // MARK: -
     // MARK: Body Layout
     var body: some View {
-        NavigationStack {
-            headerOffsetTracker
-            ScrollView {
-                VStack(spacing: 0) {
-                    titleText
-                    totalSpendingRows
-                }
-                .offset(coordinateSpace: .named("SCROLL")) { offset in
-                    offsetY = offset
+        NavigationView {
+            ZStack {
+                ScrollView {
+                    VStack(spacing: 0) {
+                        if #available(iOS 16.0, *) {
+                            titleText
+                                .fontWeight(.bold)
+                        } else {
+                            titleText
+                        }
+                        totalSpendingRows
+                    }
+                    .offset(coordinateSpace: .named("SCROLL")) { offset in
+                        offsetY = offset
+                    }
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -44,15 +50,18 @@ struct ContentView: View {
     // MARK: Navigation Bar Items
     private var navigationBarItems: some View {
         HStack {
-            menu
-            Text(headerText)
-                .frame(maxWidth: .infinity,
-                       maxHeight: .infinity)
-                .opacity(isShowingTopNavTitle ? 1 : 0)
-                .multilineTextAlignment(.center)
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .allowsHitTesting(false)
+            if #available(iOS 16.0, *) {
+                menu
+                    .menuOrder(.fixed)
+            } else {
+                menu
+            }
+            if #available(iOS 16.0, *) {
+                navTitle
+                    .fontWeight(.semibold)
+            } else {
+                navTitle
+            }
             Button(action: {
                 print("Open Settings via modal sheet")
             }, label: {
@@ -60,7 +69,7 @@ struct ContentView: View {
             })
             .frame(minWidth: 90, alignment: .trailing)
             .padding(verticalSizeClass == .regular ? 10 : 65)
-//                        .hidden() //<- Uncomment this, if you don't want to show an action button here. If you remove the button, the navigation title will not be centered.
+//                        .hidden() //<- Uncomment this, if you don't want to show an action button here. If you remove the button and its framing, the navigation title will not be centered.
         }
         .frame(width: UIScreen.main.bounds.size.width,
                alignment: .leading)
@@ -110,42 +119,50 @@ struct ContentView: View {
                 Image(systemName: "chevron.down")
                     .imageScale(.small)
             }
-            .fontWeight(.medium)
         }
-        .menuOrder(.fixed)
         .padding(verticalSizeClass == .regular ? 10 : 65)
     }
 
+    private var navTitle: some View {
+        Text(headerText)
+            .frame(maxWidth: .infinity,
+                   maxHeight: .infinity)
+            .opacity(isShowingTopNavTitle ? 1 : 0)
+            .multilineTextAlignment(.center)
+            .font(.subheadline)
+            .allowsHitTesting(false)
+    }
+
     // MARK: -
-    // MARK: Header Offset Tracker
-    private var headerOffsetTracker: some View {
+    // MARK: Large Title Text
+    private var titleText: some View {
         let height: CGFloat = headerNavHeight
         let progress = -(offsetY / height) > 1
         ? -1
         : (offsetY > 0
            ? 0
            : (offsetY / height))
-        return Group {}
-        .onChange(of: offsetY, { _, offsetY in
+        return Text(headerText)
+        // The .onChange method changed in Xcode 15. Uncomment lines 133-138, and delete 139-144
+//        .onChange(of: offsetY, { _, offsetY in
+//            self.progress = progress
+//            withAnimation(.easeInOut(duration: 0.2)) {
+//                isShowingTopNavTitle = offsetY < -headerNavHeight ? true : false
+//            }
+//        })
+        .onChange(of: offsetY, perform: { offsetY in
             self.progress = progress
             withAnimation(.easeInOut(duration: 0.2)) {
                 isShowingTopNavTitle = offsetY < -headerNavHeight ? true : false
             }
         })
-        .opacity(isShowingTopNavTitle ? -progress : 0)
-        .hidden()
-    }
-
-    // MARK: -
-    // MARK: Large Title Text
-    private var titleText: some View {
-        Text(headerText)
-            .frame(maxWidth: .infinity,
-                   maxHeight: .infinity,
-                   alignment: .topLeading)
-            .font(.largeTitle)
-            .fontWeight(.bold)
-            .padding()
+        .frame(maxWidth: .infinity,
+               maxHeight: .infinity,
+               alignment: .leading)
+        .font(.largeTitle)
+        .padding()
+        .offset(y: -progress * 20) //<- Adds a little Y offset parallax effect.
+        .opacity(1 + progress) //<- Slowly fades out the header title as you scroll down.
     }
 
     // MARK: -
@@ -172,6 +189,13 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
+// This Preview is for Xcode 15.
+//#Preview {
+//    ContentView()
+//}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }

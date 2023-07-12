@@ -8,6 +8,5 @@ https://github.com/markjeschke/MenuNav/assets/1577928/a29c72dc-a14a-4cd1-99f6-f0
 * If you're deploying this app to your physical iOS device, remember to select your developer Team account in the Signing and Capabilities tab in Xcode. Otherwise, you'll receive an error.
 
 ### Requirements:
-* Minimum target is iOS 17 Beta 3. 
-* Updated with Xcode 15 Beta 3.
-
+* Minimum target is iOS 15. Tested with iOS 17 Beta 3
+* Updated with Xcode 14.3.1 and compatible with Xcode 15 Beta 3.

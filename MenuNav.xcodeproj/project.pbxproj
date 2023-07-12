@@ -11,6 +11,7 @@
 		1755AEB22A5E1C070095D0A4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1755AEB12A5E1C070095D0A4 /* ContentView.swift */; };
 		1755AEB42A5E1C090095D0A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1755AEB32A5E1C090095D0A4 /* Assets.xcassets */; };
 		1755AEB82A5E1C090095D0A4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1755AEB72A5E1C090095D0A4 /* Preview Assets.xcassets */; };
+		1755AEBF2A5E1C2F0095D0A4 /* OffsetPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1755AEBE2A5E1C2F0095D0A4 /* OffsetPreferenceKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		1755AEB32A5E1C090095D0A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1755AEB52A5E1C090095D0A4 /* MenuNav.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MenuNav.entitlements; sourceTree = "<group>"; };
 		1755AEB72A5E1C090095D0A4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1755AEBE2A5E1C2F0095D0A4 /* OffsetPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetPreferenceKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				1755AEAF2A5E1C070095D0A4 /* MenuNavApp.swift */,
 				1755AEB12A5E1C070095D0A4 /* ContentView.swift */,
+				1755AEBE2A5E1C2F0095D0A4 /* OffsetPreferenceKey.swift */,
 				1755AEB32A5E1C090095D0A4 /* Assets.xcassets */,
 				1755AEB52A5E1C090095D0A4 /* MenuNav.entitlements */,
 				1755AEB62A5E1C090095D0A4 /* Preview Content */,
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1755AEB22A5E1C070095D0A4 /* ContentView.swift in Sources */,
+				1755AEBF2A5E1C2F0095D0A4 /* OffsetPreferenceKey.swift in Sources */,
 				1755AEB02A5E1C070095D0A4 /* MenuNavApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

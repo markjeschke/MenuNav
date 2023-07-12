@@ -1,7 +1,8 @@
 # MenuNav
 SwiftUI project, demonstrating how to display text alongside a menu icon from within the principle ToolbarItem and a long-form title.
 
-https://github-production-user-asset-6210df.s3.amazonaws.com/1577928/252819791-b446cbea-c649-4296-83d7-dfaff8b42fca.mp4
+<video src="https://github-production-user-asset-6210df.s3.amazonaws.com/1577928/252819791-b446cbea-c649-4296-83d7-dfaff8b42fca.mp4" controls="controls" style="max-width: 730px;">
+</video>
 
 
 ## Installation:
